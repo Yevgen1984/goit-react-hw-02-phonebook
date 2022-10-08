@@ -14,7 +14,7 @@ export class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    };
+  };
 
   addContact = newContact => {
     const newContactEntity = {
@@ -36,6 +36,18 @@ export class App extends Component {
     this.setState(() => ({ filter: value }));
   };
 
+  // deleteTodo = todoId => {
+  //   this.setState(prevState => ({
+  //     todos: prevState.todos.filter(todo => todo.id !== todoId),
+  //   }));
+  // };
+
+  deleteContact = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
+  };
+
   render() {
     const contactsByName = this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
@@ -51,7 +63,7 @@ export class App extends Component {
             filter={this.state.filter}
             onChange={this.handleFilterContactsByName}
           />
-          <PhoneList contacts={contactsByName} />
+          <PhoneList contacts={contactsByName} onDelete={this.deleteContact} />
         </Section>
       </>
     );

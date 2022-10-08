@@ -1,17 +1,19 @@
+import PropTypes from 'prop-types';
+import s from './PhoneList.module.css';
+
 export const PhoneList = ({ contacts, onDelete }) => {
-  console.log(contacts);
   return (
     <>
-      <ul /* className="contacts" */>
+      <ul className={s.phoneList}>
         {!contacts.length && <p>There are no contacts found!</p>}
         {contacts.length > 0 &&
           contacts.map(({ id, name, number }) => {
             return (
-              <li key={id} /* className="contact" */>
-                <span /* className="contact-name" */>{name}</span>:&nbsp;
+              <li key={id} className={s.phoneItem}>
+                <span className={s.phoneName}>{name} :</span>
                 {number}
                 <button
-                  /* className="delete-contact-btn" */
+                  className={s.btnDelete}
                   type="button"
                   onClick={() => onDelete(id)}
                 >
@@ -23,4 +25,8 @@ export const PhoneList = ({ contacts, onDelete }) => {
       </ul>
     </>
   );
+};
+PhoneList.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
